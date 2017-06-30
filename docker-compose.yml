@@ -1,0 +1,26 @@
+version: '3'
+services:
+  installvirtual:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    links:
+      - postgres
+    env_file:
+      - .installvirtual.env
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: installvirtual
+      POSTGRES_PASSWORD: installvirtual
+    ports:
+        - '5432:5432'
+    volumes:
+        - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
