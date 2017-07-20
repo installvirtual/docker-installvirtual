@@ -1,0 +1,5 @@
+test:
+  adapter: postgresql
+  database: installvirtual
+  username: postgres
+  encoding: utf8
