@@ -12,7 +12,6 @@ class PostsController < ApplicationController
   end
 
   # Create action saves the post into database
-  def create
     # @post = Post.new(title: params[:post][:title], body: params[:post][:body])
     @post = Post.new(title: post_params[:title], body: post_params[:body])
     if @post.save

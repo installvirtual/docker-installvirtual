@@ -2,11 +2,57 @@ language: ruby
 rvm:
  - 2.2
 
+# before_script:
+#   - psql -c "CREATE USER installvirtual WITH PASSWORD 'installvirtual';" -U postgres
+
+# install: gem install rake -v 12.0.0
+# install: gem install rails
+# install: gem install rubygems-bundler
+# install: gem regenerate_binstubs
+
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rake
 before_script:
-  - psql -c "CREATE USER installvirtual WITH PASSWORD 'installvirtual';" -U postgres
+  - cp config/database.travis.yml config/database.yml
+  - mysql -e 'create database installvirtual'
+  - psql -c 'create database installvirtual' -U postgres
 
-install: gem install rake -v 12.0.0
-install: gem install rails
-install: gem install rubygems-bundler
-install: gem regenerate_binstubs
 
+# config/database.travis.yml
+sqlite: &sqlite
+  adapter: sqlite3
+  database: db/<%= Rails.env %>.sqlite3
+
+mysql: &mysql
+  adapter: mysql2
+  username: root
+  password:
+  database: strano_<%= Rails.env %>
+
+postgresql: &postgresql
+  adapter: postgresql
+  username: postgres
+  password:
+  database: strano_<%= Rails.env %>
+  min_messages: ERROR
+
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  host: localhost
+  <<: *<%= ENV['DB'] || "postgresql" %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
