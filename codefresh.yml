@@ -1,0 +1,6 @@
+version: '1.0'
+steps:
+  build_image:
+    type: build
+    description: Building the image...
+    image-name: ruby:2.2.0 
