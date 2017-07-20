@@ -1,11 +1,19 @@
+default: &default
+  adapter: psql
+  encoding: utf8
+  username: installvirtual
+  password: installvirtual
+  host: 127.0.0.1
+  port: 5432
+
 development:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_development?') %>
+  <<: *default
+  database: installvirtual_dev
 
 test:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_test?') %>
-
-staging:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_staging?') %>
+  <<: *default
+  database: installvirtual_test
 
 production:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_production?') %>
+  <<: *default
+  database: installvirtual_prod
