@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: installvirtual
+  password: installvirtual
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: installvirtual_dev
+
+test:
+  <<: *default
+  database: installvirtual_test
+
+production:
+  <<: *default
+  database: installvirtual_prod

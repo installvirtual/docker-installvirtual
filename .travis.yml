@@ -2,11 +2,27 @@ language: ruby
 rvm:
  - 2.2
 
-before_script:
-  - psql -c "CREATE USER installvirtual WITH PASSWORD 'installvirtual';" -U postgres
+# before_script:
+#   - psql -c "CREATE USER installvirtual WITH PASSWORD 'installvirtual';" -U postgres
 
-install: gem install rake -v 12.0.0
-install: gem install rails
-install: gem install rubygems-bundler
-install: gem regenerate_binstubs
+# install: gem install rake -v 12.0.0
+# install: gem install rails
+# install: gem install rubygems-bundler
+# install: gem regenerate_binstubs
+
+env:
+  - DB=postgresql
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rake
+before_script:
+  - "cp .travis.database.yml ./config/database.yml"
+  - psql -c 'create database installvirtual' -U postgres
+
+install: gem install
+
+script: 
+  - bundle exec rake db:schema:load
+  - bundle exec rake db:test:prepare
 
