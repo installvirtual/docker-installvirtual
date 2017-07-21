@@ -14,6 +14,7 @@ services:
 
   postgres:
     image: postgres
+    container_name: postgres
     environment:
       POSTGRES_USER: installvirtual
       POSTGRES_PASSWORD: installvirtual

@@ -12,8 +12,13 @@ class PostsController < ApplicationController
   end
 
   # Create action saves the post into database
+  def create
     # @post = Post.new(title: params[:post][:title], body: params[:post][:body])
     @post = Post.new(title: post_params[:title], body: post_params[:body])
+    # @post = Post.new(post_params)
+    Rails.logger.info "----" * 10
+    Rails.logger.info "post_params"
+    Rails.logger.info "----" * 10
     if @post.save
       flash[:notice] = "Successfully created post!"
       redirect_to post_path(@post)
