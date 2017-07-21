@@ -1,14 +1,7 @@
 Rails.application.routes.draw do
   Rails.application.routes.draw do
   root to: "posts#index"
-  mount Ckeditor::Engine => '/ckeditor'
-  config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
-
-  config.filebrowserFlashBrowseUrl = "/ckeditor/attachment_files";
-
-  config.filebrowserFlashUploadUrl = "/ckeditor/attachment_files";
-
-  config.filebrowserImageBrowseLinkUrl = "/ckeditor/pictures";
+  
   resources :posts
 end
   # The priority is based upon order of creation: first created -> highest priority.
