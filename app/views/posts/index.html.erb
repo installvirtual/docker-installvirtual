@@ -1,21 +1,9 @@
-<div class="container">
-  <div class="col-sm-10 col-sm-offset-1 col-xs-12 blog-content">
-    <% @posts.each do |post| %>
-    <div class="col-xs-12">
-      <div class="text-center">
-        <h2><%= post.title %></h2>
-        <h6><%= post.created_at.strftime('%b %d, %Y') %></h6>
-      </div>
+<h1>Hey this is my second blog</h1>
 
-      <div>
-        <%= raw(post.body).truncate(358) %>
-      </div>
-
-      <div class="text-center">
-        <%= link_to "READ MORE", post_path(post) %>
-      </div>
-      <br>
-    </div>
-    <% end %>
-  </div>
-</div>
+<% @posts.each do |post| %>	
+	<div class="well">
+	<h3><%= post.title %></h3>
+	<p><%= post.body %></p>
+	<%= link_to "Read more", post_path(post, :class => 'btn btn-default') %>
+	</div>
+<% end %>
