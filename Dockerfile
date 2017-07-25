@@ -4,6 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
+RUn gem install nokogiri
 RUN bundle install
 ADD . /app
 
