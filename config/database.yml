@@ -3,7 +3,7 @@ default: &default
   encoding: unicode
   username: installvirtual
   password: installvirtual
-  host: localhost
+  host: postgres
   port: 5432
 
 development:
