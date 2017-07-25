@@ -31,6 +31,7 @@ gem 'bootstrap-sass', '~> 3.3'
 # Capistrano for compose
 gem 'capistrano-decompose'
 
+gem 'nokogiri'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
