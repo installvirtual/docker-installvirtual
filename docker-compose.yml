@@ -9,8 +9,8 @@ services:
       - "3000:3000"
     links:
       - postgres
-    env_file:
-      - .installvirtual.env
+    # env_file:
+    #   - .installvirtual.env
 
   postgres:
     image: postgres
